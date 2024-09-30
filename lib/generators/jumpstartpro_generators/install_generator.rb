@@ -15,6 +15,19 @@ module JumpstartProGenerators
         copy_file "config/cable.yml", "config/cable.yml", force: true
       end
 
+      def editor_settings
+        copy_file ".cursorrules", ".cursorrules"
+      end
+
+      def bin_setup_updates
+        # replace '  system! "bin/rails db:prepare"' with '  system! "bin/rails db:schema:load db:seed"'
+        gsub_file "bin/setup", %(system! "bin/rails db:prepare"), <<-RUBY.strip
+  system! "bin/rails db:environment:set RAILS_ENV=development"
+  system! "bin/rails db:drop db:create"
+  system! "bin/rails db:schema:load db:seed"
+        RUBY
+      end
+
       private
 
       def application_js_path(ext)

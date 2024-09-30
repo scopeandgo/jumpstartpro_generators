@@ -37,6 +37,15 @@ module GeneratorTestHelpers
       FileUtils.cd(tmp_path) do
         system "rails new rails_app --skip-active-record --skip-test-unit --skip-spring --skip-bundle --quiet"
       end
+      inject_jumpstart_pro_files
+    end
+
+    # Copy files in test/support/files to the tmp app
+    def inject_jumpstart_pro_files
+      Dir[File.join(test_path, "support/files/**/*")].each do |file|
+        FileUtils.mkdir_p(File.dirname(file))
+        FileUtils.cp_r(file, destination_root)
+      end
     end
 
     def remove_generator_sample_app

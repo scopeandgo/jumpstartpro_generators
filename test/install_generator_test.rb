@@ -22,9 +22,14 @@ class JumpstartProGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     run_generator
   end
 
-  test "generates anyway_config files" do
+  test "generates files" do
     assert_file "config/configs/application_config.rb"
     assert_file "config/configs/rails_config.rb"
     assert_file "config/configs/redis_config.rb"
+
+    assert_file ".cursorrules"
+
+    # bin/setup should contain bin/rails db:schema:load db:seed
+    assert_file "bin/setup", /bin\/rails db:schema:load db:seed/
   end
 end
