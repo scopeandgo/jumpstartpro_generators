@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= RailsConfig.max_threads %>
+
+development:
+  <<: *default
+  database: <%= RailsConfig.database_name %>
+
+test:
+  <<: *default
+  database: <%= RailsConfig.database_name %>
+
+production:
+  <<: *default
+  database: <%= RailsConfig.database_name %>
