@@ -31,5 +31,8 @@ class JumpstartProGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
     # bin/setup should contain bin/rails db:schema:load db:seed
     assert_file "bin/setup", /bin\/rails db:schema:load db:seed/
+
+    # db/seeds.rb should contain drnic@scopego.co
+    assert_file "db/seeds.rb", /drnic@scopego.co/
   end
 end

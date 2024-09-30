@@ -28,6 +28,10 @@ module JumpstartProGenerators
         RUBY
       end
 
+      def copy_seeds_file
+        copy_file "db/seeds.rb", "db/seeds.rb", force: true
+      end
+
       private
 
       def application_js_path(ext)
