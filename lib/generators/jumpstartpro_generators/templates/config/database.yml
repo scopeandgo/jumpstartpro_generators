@@ -5,12 +5,12 @@ default: &default
 
 development:
   <<: *default
-  database: <%= RailsConfig.database_name %>
+  database: <%= RailsConfig.app_name %>_development
 
 test:
   <<: *default
-  database: <%= RailsConfig.database_name %>
+  database: <%= RailsConfig.app_name %>_test
 
 production:
   <<: *default
-  database: <%= RailsConfig.database_name %>
+  database: <%= RailsConfig.app_name %>_production

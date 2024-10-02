@@ -27,10 +27,6 @@ class RailsConfig < ApplicationConfig
     @app_name ||= super || File.basename(Rails.root).split("-").first
   end
 
-  def database_name
-    "#{app_name}_#{RailsConfig.env}"
-  end
-
   def serve_static_files?
     serve_static_files.present?
   end

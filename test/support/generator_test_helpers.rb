@@ -33,18 +33,11 @@ module GeneratorTestHelpers
     end
 
     def create_generator_sample_app
-      FileUtils.mkdir_p(tmp_path)
-      FileUtils.cd(tmp_path) do
-        system "rails new rails_app --skip-active-record --skip-test-unit --skip-spring --skip-bundle --quiet"
-      end
-      inject_jumpstart_pro_files
-    end
-
-    # Copy files in test/support/files to the tmp app
-    def inject_jumpstart_pro_files
-      Dir[File.join(test_path, "support/files/**/*")].each do |file|
-        FileUtils.mkdir_p(File.dirname(file))
-        FileUtils.cp_r(file, destination_root)
+      local = ENV["LOCAL_JSP_CLONE"]
+      if local && File.directory?(local)
+        system "git clone #{local} #{tmp_path}/rails_app"
+      else
+        system "git clone https://github.com/jumpstart-pro/jumpstart-pro-rails.git #{tmp_path}/rails_app"
       end
     end
 

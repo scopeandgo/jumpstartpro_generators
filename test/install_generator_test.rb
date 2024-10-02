@@ -23,6 +23,8 @@ class JumpstartProGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
   end
 
   test "generates files" do
+    assert_file "Gemfile", /anyway_config/
+
     assert_file "config/configs/application_config.rb"
     assert_file "config/configs/rails_config.rb"
     assert_file "config/configs/redis_config.rb"

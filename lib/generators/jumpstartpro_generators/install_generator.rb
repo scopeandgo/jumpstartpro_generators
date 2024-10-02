@@ -9,6 +9,11 @@ module JumpstartProGenerators
       desc "Install Scope & Go defaults into Jumpstart Pro"
       source_root File.join(File.dirname(__FILE__), "templates")
 
+      def add_gemfile_entries
+        gem "anyway_config"
+        run "bundle install"
+      end
+
       def copy_config_files
         directory "config/configs", "config/configs"
         copy_file "config/database.yml", "config/database.yml", force: true
@@ -22,7 +27,6 @@ module JumpstartProGenerators
       def bin_setup_updates
         # replace '  system! "bin/rails db:prepare"' with '  system! "bin/rails db:schema:load db:seed"'
         gsub_file "bin/setup", %(system! "bin/rails db:prepare"), <<-RUBY.strip
-  system! "bin/rails db:environment:set RAILS_ENV=development"
   system! "bin/rails db:drop db:create"
   system! "bin/rails db:schema:load db:seed"
         RUBY

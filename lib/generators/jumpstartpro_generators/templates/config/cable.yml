@@ -1,16 +1,14 @@
 default: &default
   adapter: redis
   url: <%= RedisConfig.url %>
-  channel_prefix: <%= RailsConfig.database_name %>
 
 development:
   <<: *default
+  channel_prefix: <%= RailsConfig.app_name %>_development
 
 test:
   adapter: async
 
-staging:
-  <<: *default
-
 production:
   <<: *default
+  channel_prefix: <%= RailsConfig.app_name %>_production
