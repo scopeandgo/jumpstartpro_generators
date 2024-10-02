@@ -59,10 +59,10 @@ curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/ref
 
 See [`bin/newrepo`](bin/newrepo) for optional flags that can be added/used instead of `--force` above.
 
-For example, to use upstream JSP repo, use the `--repo` flag:
+For example, to use an alternate JSP repo, use the `--repo` flag:
 
 ```bash
-curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force --repo https://github.com/jumpstart-pro/jumpstart-pro.git
+curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force --repo https://github.com/scopeandgo/jumpstart-pro.git
 ```
 
 The `--repo` argument could also be a file path to a local git clone.

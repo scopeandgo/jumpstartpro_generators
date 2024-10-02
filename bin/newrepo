@@ -2,7 +2,7 @@
 
 set -e
 
-git_repo="https://github.com/scopeandgo/jumpstart-pro-rails.git"
+git_repo="https://github.com/jumpstart-pro/jumpstart-pro-rails.git"
 git_branch=
 force=false
 
@@ -45,11 +45,16 @@ if [ -d "$repo_name" ] && [ "$force" = true ]; then
   rm -rf "$repo_name"
 fi
 
+function _git() {
+  echo "git $@"
+  command git "$@"
+}
+
 # Clone the repository
 if [ -n "$git_branch" ]; then
-  git clone "$git_repo" -b "$git_branch" "$repo_name"
+  _git clone "$git_repo" -b "$git_branch" "$repo_name"
 else
-  git clone "$git_repo" "$repo_name"
+  _git clone "$git_repo" "$repo_name"
 fi
 
 # Change directory to the new repo
