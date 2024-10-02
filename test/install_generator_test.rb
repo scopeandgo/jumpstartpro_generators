@@ -36,5 +36,13 @@ class JumpstartProGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
     # db/seeds.rb should contain drnic@scopego.co
     assert_file "db/seeds.rb", /drnic@scopego.co/
+
+    # within destination root, set bundler dir and run bin/setup, it should not fail
+    FileUtils.cd(destination_root) do
+      system "BUNDLE_GEMFILE=#{destination_root}/Gemfile bin/setup"
+      assert $?.success?
+      system "BUNDLE_GEMFILE=#{destination_root}/Gemfile bin/rails test"
+      assert $?.success?
+    end
   end
 end
