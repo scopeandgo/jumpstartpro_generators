@@ -11,10 +11,28 @@ When we start new client or internal projects we use [Jumpstart Pro](https://jum
 
 ## Usage
 
+There is a one-line command [`bin/newrepo`](bin/newrepo) you can run to clone JumpstartPro, run the generators, setup, and run the tests:
+
+```bash
+curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force
+```
+
+See [`bin/newrepo`](bin/newrepo) for optional flags that can be added/used instead of `--force` above.
+
+For example, to use an alternate JSP repo, use the `--repo` flag:
+
+```bash
+curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force --repo https://github.com/scopeandgo/jumpstart-pro.git
+```
+
+The `--repo` argument could also be a file path to a local git clone.
+
+### Manual usage
+
 Given the app name `testapp`:
 
 ```plain
-git clone https://github.com/scopeandgo/jumpstart-pro-rails.git testapp
+git clone https://github.com/jumpstart-pro/jumpstart-pro-rails.git testapp
 cd testapp
 
 bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
@@ -24,6 +42,8 @@ bundle remove jumpstartpro_generators || true
 bin/setup
 bin/rails test
 ```
+
+### Output
 
 The generator output might look like:
 
@@ -48,24 +68,6 @@ The created databases will be based on the app name:
 * `testapp_test`
 
 The `bin/setup` also runs `rails db:seed` which adds `drnic@scopego.co` and other admin users. Edit `db/seeds.rb` to add more seed users.
-
-## One line usage
-
-Alternately, there is a one-line command [`bin/newrepo`](bin/newrepo) you can run to clone JumpstartPro, run the generators, setup, and run the tests:
-
-```bash
-curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force
-```
-
-See [`bin/newrepo`](bin/newrepo) for optional flags that can be added/used instead of `--force` above.
-
-For example, to use an alternate JSP repo, use the `--repo` flag:
-
-```bash
-curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force --repo https://github.com/scopeandgo/jumpstart-pro.git
-```
-
-The `--repo` argument could also be a file path to a local git clone.
 
 ## Development
 
