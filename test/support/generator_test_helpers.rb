@@ -24,10 +24,6 @@ module GeneratorTestHelpers
   end
 
   module ClassMethods
-    def test_path
-      File.join(File.dirname(__FILE__), "..")
-    end
-
     def tmp_path
       File.expand_path("../../tmp", File.dirname(__FILE__))
     end
