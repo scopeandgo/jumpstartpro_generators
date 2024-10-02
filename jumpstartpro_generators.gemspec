@@ -4,7 +4,7 @@ require_relative "lib/jumpstartpro_generators/version"
 
 Gem::Specification.new do |spec|
   spec.name = "jumpstartpro_generators"
-  spec.version = JumpstartProGenerators::VERSION
+  spec.version = JumpstartproGenerators::VERSION
   spec.authors = ["Dr Nic Williams"]
   spec.email = ["drnicwilliams@gmail.com"]
 

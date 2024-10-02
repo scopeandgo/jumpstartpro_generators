@@ -3,12 +3,12 @@
 require "test_helper"
 require "generators/jumpstartpro_generators/install_generator"
 
-class JumpstartProGenerators::InstallGeneratorTest < ::Rails::Generators::TestCase
+class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCase
   include GeneratorTestHelpers
 
   class_attribute :install_destination
 
-  tests JumpstartProGenerators::Generators::InstallGenerator
+  tests JumpstartproGenerators::Generators::InstallGenerator
   destination File.join(tmp_path, "rails_app")
 
   remove_generator_sample_app

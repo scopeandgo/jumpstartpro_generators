@@ -2,7 +2,7 @@
 
 require_relative "jumpstartpro_generators/version"
 
-module JumpstartProGenerators
+module JumpstartproGenerators
   class Error < StandardError; end
   # Your code goes here...
 end

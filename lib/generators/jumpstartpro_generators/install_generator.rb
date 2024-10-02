@@ -3,7 +3,7 @@
 require "rails/generators"
 require "fileutils"
 
-module JumpstartProGenerators
+module JumpstartproGenerators
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
       desc "Install Scope & Go defaults into Jumpstart Pro"
