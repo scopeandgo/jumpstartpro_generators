@@ -3,7 +3,7 @@
 set -e
 
 git_repo="https://github.com/scopeandgo/jumpstart-pro-rails.git"
-git_branch="main"
+git_branch=
 force=false
 
 # USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [--force]
@@ -46,7 +46,11 @@ if [ -d "$repo_name" ] && [ "$force" = true ]; then
 fi
 
 # Clone the repository
-git clone "$git_repo" -b "$git_branch" "$repo_name"
+if [ -n "$git_branch" ]; then
+  git clone "$git_repo" -b "$git_branch" "$repo_name"
+else
+  git clone "$git_repo" "$repo_name"
+fi
 
 # Change directory to the new repo
 cd "$repo_name" || exit

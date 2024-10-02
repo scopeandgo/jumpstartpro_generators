@@ -49,6 +49,24 @@ The created databases will be based on the app name:
 
 The `bin/setup` also runs `rails db:seed` which adds `drnic@scopego.co` and other admin users. Edit `db/seeds.rb` to add more seed users.
 
+## One line usage
+
+Alternately, there is a one-line command [`bin/newrepo`](bin/newrepo) you can run to clone JumpstartPro, run the generators, setup, and run the tests:
+
+```bash
+curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force
+```
+
+See [`bin/newrepo`](bin/newrepo) for optional flags that can be added/used instead of `--force` above.
+
+For example, to use upstream JSP repo, use the `--repo` flag:
+
+```bash
+curl -s https://raw.githubusercontent.com/scopeandgo/jumpstartpro_generators/refs/heads/develop/bin/newrepo | bash -s -- testapp --force --repo https://github.com/jumpstart-pro/jumpstart-pro.git
+```
+
+The `--repo` argument could also be a file path to a local git clone.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
