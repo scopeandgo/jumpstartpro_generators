@@ -11,11 +11,16 @@ When we start new client or internal projects we use [Jumpstart Pro](https://jum
 
 ## Usage
 
+Given the app name `testapp`:
+
 ```plain
 git clone https://github.com/scopeandgo/jumpstart-pro-rails.git testapp
 cd testapp
+
 bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
 bin/rails generate jumpstartpro_generators:install
+bundle remove jumpstartpro_generators || true
+
 bin/setup
 bin/rails test
 ```
@@ -36,6 +41,11 @@ Fetching gem metadata from https://rubygems.org/........
         gsub  bin/setup
        force  db/seeds.rb
 ```
+
+The created databases will be based on the app name:
+
+* `testapp_development`
+* `testapp_test`
 
 ## Development
 
