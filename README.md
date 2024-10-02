@@ -9,6 +9,34 @@ When we start new client or internal projects we use [Jumpstart Pro](https://jum
 * Tweaks to `config/database.yml` and `config/cable.yml`
 * Initial `db/seeds.rb` for creating staff seeds as admins
 
+## Usage
+
+```plain
+git clone https://github.com/scopeandgo/jumpstart-pro-rails.git testapp
+cd testapp
+bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
+bin/rails generate jumpstartpro_generators:install
+bin/setup
+bin/rails test
+```
+
+The generator output might look like:
+
+```plain
+     gemfile  anyway_config
+         run  bundle install from "."
+Fetching gem metadata from https://rubygems.org/........
+      create  config/configs
+      create  config/configs/application_config.rb
+      create  config/configs/rails_config.rb
+      create  config/configs/redis_config.rb
+       force  config/database.yml
+       force  config/cable.yml
+      create  .cursorrules
+        gsub  bin/setup
+       force  db/seeds.rb
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
