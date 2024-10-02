@@ -57,9 +57,9 @@ function _git() {
 
 # Clone the repository
 if [ -n "$git_branch" ]; then
-  _git clone "$git_repo" -b "$git_branch" "$repo_name"
+  _git clone "$git_repo" -o jumpstartpro "$repo_name"
 else
-  _git clone "$git_repo" "$repo_name"
+  _git clone "$git_repo" -o jumpstartpro "$repo_name"
 fi
 
 # Change directory to the new repo
@@ -91,5 +91,7 @@ echo "To run the app, run:
 
 To create new repo on github, run:
 
-  gh repo create $github_org/$app_name --source=$repo_name --remote=upstream --private --push
+  cd $repo_name
+  gh repo create $github_org/$app_name --source=. --remote=upstream --private --push
+  gh repo set-default $github_org/$app_name
 "
