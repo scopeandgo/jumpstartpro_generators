@@ -47,6 +47,8 @@ The created databases will be based on the app name:
 * `testapp_development`
 * `testapp_test`
 
+The `bin/setup` also runs `rails db:seed` which adds `drnic@scopego.co` and other admin users. Edit `db/seeds.rb` to add more seed users.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
