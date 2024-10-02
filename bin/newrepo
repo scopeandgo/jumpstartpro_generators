@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -e
+
+git_repo="https://github.com/scopeandgo/jumpstart-pro-rails.git"
+git_branch="main"
+force=false
+
+# USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [--force]
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+  -r | --repo)
+    git_repo="$2"
+    shift
+    ;;
+  -b | --branch)
+    git_branch="$2"
+    shift
+    ;;
+  --force)
+    force=true
+    ;;
+  *) repo_name="$1" ;;
+  esac
+  shift
+done
+
+# show usage if no repo name
+if [ -z "$repo_name" ]; then
+  echo "Usage: $0 <repo-name> [-r <git-repo>] [-b <git-branch>] [--force]"
+  exit 1
+fi
+
+# Usage instructions from README
+echo "This script initializes a new repository named '$repo_name'."
+
+# if $repo_name exists and $force is not set, exit
+if [ -d "$repo_name" ] && [ "$force" = false ]; then
+  echo "Repository '$repo_name' already exists. Use --force to overwrite."
+  exit 1
+fi
+
+# if it exists and $force is set, rm -rf it
+if [ -d "$repo_name" ] && [ "$force" = true ]; then
+  rm -rf "$repo_name"
+fi
+
+# Clone the repository
+git clone "$git_repo" -b "$git_branch" "$repo_name"
+
+# Change directory to the new repo
+cd "$repo_name" || exit
+
+# Install and run the generator
+bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
+bin/rails generate jumpstartpro_generators:install
+bundle remove jumpstartpro_generators || true
+
+# Setup the environment
+bin/setup
+
+# Run the tests
+bin/rails test
+
+echo "Repository '$repo_name' has been initialized successfully."
