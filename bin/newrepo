@@ -2,11 +2,12 @@
 
 set -e
 
+github_org="yourorg"
 git_repo="https://github.com/jumpstart-pro/jumpstart-pro-rails.git"
 git_branch=
 force=false
 
-# USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [--force]
+# USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [-o <github-org>] [--force]
 while [[ "$#" -gt 0 ]]; do
   case $1 in
   -r | --repo)
@@ -15,6 +16,10 @@ while [[ "$#" -gt 0 ]]; do
     ;;
   -b | --branch)
     git_branch="$2"
+    shift
+    ;;
+  -o | --github-org)
+    github_org="$2"
     shift
     ;;
   --force)
@@ -27,7 +32,7 @@ done
 
 # show usage if no repo name
 if [ -z "$repo_name" ]; then
-  echo "Usage: $0 <repo-name> [-r <git-repo>] [-b <git-branch>] [--force]"
+  echo "Usage: $0 <repo-name> [-r <git-repo>] [-b <git-branch>] [-o <github-org>] [--force]"
   exit 1
 fi
 
@@ -46,7 +51,7 @@ if [ -d "$repo_name" ] && [ "$force" = true ]; then
 fi
 
 function _git() {
-  echo "git $@"
+  echo git "$@"
   command git "$@"
 }
 
@@ -60,6 +65,9 @@ fi
 # Change directory to the new repo
 cd "$repo_name" || exit
 
+# app_name = current directory name
+app_name=$(basename "$(pwd)")
+
 # Install and run the generator
 bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
 bin/rails generate jumpstartpro_generators:install
@@ -72,3 +80,16 @@ bin/setup
 bin/rails test
 
 echo "Repository '$repo_name' has been initialized successfully."
+
+_git add .
+_git commit -m "Installing extras on top of Jumpstart Pro"
+
+echo "To run the app, run:
+
+  cd $repo_name
+  bin/dev
+
+To create new repo on github, run:
+
+  gh repo create $github_org/$app_name --source=$repo_name --remote=upstream --private --push
+"
