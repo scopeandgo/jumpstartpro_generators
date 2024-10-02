@@ -37,7 +37,7 @@ module GeneratorTestHelpers
       if local && File.directory?(local)
         system "git clone #{local} #{tmp_path}/rails_app"
       else
-        system "git clone https://github.com/jumpstart-pro/jumpstart-pro-rails.git #{tmp_path}/rails_app"
+        system "git clone https://drnic:#{ENV["GH_TOKEN"]}@github.com/scopeandgo/jumpstart-pro-rails.git #{tmp_path}/rails_app"
       end
     end
 
