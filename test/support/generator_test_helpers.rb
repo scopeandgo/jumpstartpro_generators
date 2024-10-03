@@ -30,9 +30,12 @@ module GeneratorTestHelpers
 
     def create_generator_sample_app
       local = ENV["LOCAL_JSP_CLONE"]
-      if local && File.directory?(local)
+      if local && File.directory?(File.expand_path(local))
+        local = File.expand_path(local)
+        warn "Using local jumpstart-pro-rails: #{local}"
         system "git clone #{local} #{tmp_path}/rails_app"
       else
+        warn "Using remote jumpstart-pro-rails"
         system "git clone https://drnic:#{ENV["GH_TOKEN"]}@github.com/scopeandgo/jumpstart-pro-rails.git #{tmp_path}/rails_app"
       end
     end

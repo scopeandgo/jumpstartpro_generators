@@ -20,6 +20,10 @@ module JumpstartproGenerators
         copy_file "config/cable.yml", "config/cable.yml", force: true
       end
 
+      def copy_initializers
+        directory "config/initializers", "config/initializers"
+      end
+
       def editor_settings
         copy_file ".cursorrules", ".cursorrules"
       end

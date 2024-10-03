@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["drnicwilliams@gmail.com"]
 
   spec.summary = "Generators for Jumpstart Pro projects."
-  spec.description = "A collection of generators and configurations for Jumpstart Pro projects, including initial gems, config, and files."  # Updated description
+  spec.description = "A collection of generators and configurations for Jumpstart Pro projects, including initial gems, config, and files." # Updated description
   spec.homepage = "https://github.com/scopeandgo/jumpstartpro_generators"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"

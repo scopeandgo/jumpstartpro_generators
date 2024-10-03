@@ -29,6 +29,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/configs/rails_config.rb"
     assert_file "config/configs/redis_config.rb"
 
+    assert_file "config/initializers/generators.rb"
+
     assert_file ".cursorrules"
 
     # bin/setup should contain bin/rails db:schema:load db:seed
