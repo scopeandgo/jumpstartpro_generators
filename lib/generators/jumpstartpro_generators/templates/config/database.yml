@@ -1,5 +1,6 @@
 default: &default
   adapter: postgresql
+  port: <%= ENV.fetch("PGPORT") { 5432 } %>
   encoding: unicode
   pool: <%= RailsConfig.max_threads %>
 
