@@ -40,6 +40,11 @@ module JumpstartproGenerators
         copy_file "db/seeds.rb", "db/seeds.rb", force: true
       end
 
+      def move_readme_file
+        move_file "README.md", "README_JSP.md"
+        template "README.md.tt", "README.md"
+      end
+
       private
 
       def application_js_path(ext)
@@ -60,6 +65,10 @@ module JumpstartproGenerators
           layouts_dir("application#{ext}")
         }
         layouts.find { |layout| File.exist?(layout) }
+      end
+
+      def app_name
+        File.basename(destination_root)
       end
 
       def javascripts_dir(*paths)
@@ -88,6 +97,12 @@ module JumpstartproGenerators
 
       def silenced?
         ENV["RAILS_ENV"] == "test"
+      end
+
+      def move_file(source, destination)
+        source = File.expand_path(source.to_s, destination_root)
+        destination = File.expand_path(destination.to_s, destination_root)
+        FileUtils.mv(source, destination)
       end
     end
   end

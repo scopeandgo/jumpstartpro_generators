@@ -39,6 +39,9 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     # db/seeds.rb should contain drnic@scopego.co
     assert_file "db/seeds.rb", /drnic@scopego.co/
 
+    assert_file "README_JSP.md", /# 🎉 Jumpstart Pro Rails/
+    assert_file "README.md", /# Rails app/
+
     # TODO:  run bin/setup && bin/rails test within destination root, it should not fail
   end
 end
