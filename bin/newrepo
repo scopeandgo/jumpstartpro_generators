@@ -89,6 +89,10 @@ echo "To run the app, run:
   cd $repo_name
   bin/dev
 
+Configure app:
+
+  * Solid Queue
+
 To create new repo on github, run:
 
   cd $repo_name
