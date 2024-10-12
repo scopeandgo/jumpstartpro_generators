@@ -21,6 +21,7 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
   setup do
     ENV.update("BUNDLE_GEMFILE" => File.join(destination_root, "Gemfile"))
+    system "cd #{destination_root} && bundle install"
     run_generator
   end
 

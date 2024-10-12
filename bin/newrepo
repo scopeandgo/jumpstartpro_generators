@@ -7,7 +7,7 @@ git_repo="https://github.com/jumpstart-pro/jumpstart-pro-rails.git"
 git_branch=
 force=false
 
-# USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [-o <github-org>] [--force]
+# USAGE: bin/newrepo <repo-name> [-r <git-repo>] [-b <git-branch>] [-o <github-org>] [-l <local-generator-path>] [--force]
 while [[ "$#" -gt 0 ]]; do
   case $1 in
   -r | --repo)
@@ -21,6 +21,9 @@ while [[ "$#" -gt 0 ]]; do
   -o | --github-org)
     github_org="$2"
     shift
+    ;;
+  -l | --local-generator-path)
+    local_generator_path="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
     ;;
   --force)
     force=true
@@ -69,7 +72,11 @@ cd "$repo_name" || exit
 app_name=$(basename "$(pwd)")
 
 # Install and run the generator
-bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
+if [ -n "$local_generator_path" ]; then
+  bundle add jumpstartpro_generators --path "$local_generator_path"
+else
+  bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
+fi
 bin/rails generate jumpstartpro_generators:install
 bundle remove jumpstartpro_generators || true
 bundle update
@@ -89,10 +96,6 @@ echo "To run the app, run:
 
   cd $repo_name
   bin/dev
-
-Configure app:
-
-  * Solid Queue
 
 To create new repo on github, run:
 
