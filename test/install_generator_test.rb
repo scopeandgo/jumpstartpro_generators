@@ -16,9 +16,11 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
   Minitest.after_run do
     # remove_generator_sample_app
+    ENV.delete("BUNDLE_GEMFILE")
   end
 
   setup do
+    ENV.update("BUNDLE_GEMFILE" => File.join(destination_root, "Gemfile"))
     run_generator
   end
 
@@ -27,7 +29,6 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
     assert_file "config/configs/application_config.rb"
     assert_file "config/configs/rails_config.rb"
-    assert_file "config/configs/redis_config.rb"
 
     assert_file "config/initializers/generators.rb"
 

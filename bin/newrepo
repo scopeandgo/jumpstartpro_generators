@@ -72,6 +72,7 @@ app_name=$(basename "$(pwd)")
 bundle add jumpstartpro_generators --github scopeandgo/jumpstartpro_generators
 bin/rails generate jumpstartpro_generators:install
 bundle remove jumpstartpro_generators || true
+bundle update
 
 # Setup the environment
 bin/setup

@@ -10,14 +10,13 @@ module JumpstartproGenerators
       source_root File.join(File.dirname(__FILE__), "templates")
 
       def add_gemfile_entries
-        gem "anyway_config"
-        run "bundle install"
-      end
+        %w[anyway_config solid_cache solid_queue solid_cable mission_control-jobs].each do |gem|
+          unless File.read(File.join(destination_root, "Gemfile")).include?(gem)
+            gem gem
+          end
+        end
 
-      def copy_config_files
-        directory "config/configs", "config/configs"
-        copy_file "config/database.yml", "config/database.yml", force: true
-        copy_file "config/cable.yml", "config/cable.yml", force: true
+        run "bundle install"
       end
 
       def copy_initializers
@@ -43,6 +42,29 @@ module JumpstartproGenerators
       def move_readme_file
         move_file "README.md", "README_JSP.md"
         template "README.md.tt", "README.md"
+      end
+
+      def setup_solid_queue
+        gsub_file "config/environments/development.rb", "config.cache_store = :memory_store", <<-RUBY.strip
+  # Replace the default in-process memory cache store with a durable alternative.
+  config.cache_store = :solid_cache_store
+
+  # Replace the default in-process and non-durable queuing backend for Active Job.
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = {database: {writing: :queue}}
+        RUBY
+
+        # delete config/recurring.yml
+        remove_file "config/recurring.yml"
+        generate "solid_queue:install"
+        generate "solid_cache:install"
+        generate "solid_cable:install"
+      end
+
+      def copy_config_files
+        directory "config/configs", "config/configs"
+        copy_file "config/database.yml", "config/database.yml", force: true
+        copy_file "config/cable.yml", "config/cable.yml", force: true
       end
 
       private

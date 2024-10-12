@@ -54,7 +54,6 @@ Fetching gem metadata from https://rubygems.org/........
       create  config/configs
       create  config/configs/application_config.rb
       create  config/configs/rails_config.rb
-      create  config/configs/redis_config.rb
        force  config/database.yml
        force  config/cable.yml
       create  .cursorrules

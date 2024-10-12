@@ -38,6 +38,7 @@ module GeneratorTestHelpers
         warn "Using remote jumpstart-pro-rails"
         system "git clone https://drnic:#{ENV["GH_TOKEN"]}@github.com/scopeandgo/jumpstart-pro-rails.git #{tmp_path}/rails_app"
       end
+      # system "cd #{tmp_path}/rails_app && bundle update"
     end
 
     def remove_generator_sample_app

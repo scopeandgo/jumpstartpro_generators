@@ -5,13 +5,42 @@ default: &default
   pool: <%= RailsConfig.max_threads %>
 
 development:
-  <<: *default
-  database: <%= RailsConfig.app_name %>_development
+  primary:
+    <<: *default
+    database: <%= RailsConfig.app_name %>_development
+  cache:
+    <<: *default
+    database: <%= RailsConfig.app_name %>_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: <%= RailsConfig.app_name %>_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: <%= RailsConfig.app_name %>_development_cable
+    migrations_paths: db/cable_migrate
 
 test:
   <<: *default
   database: <%= RailsConfig.app_name %>_test
 
 production:
-  <<: *default
-  database: <%= RailsConfig.app_name %>_production
+  primary: &primary_production
+    <<: *default
+    database: <%= RailsConfig.app_name %>_production
+    username: <%= ENV.fetch("POSTGRES_USER", "postgres") %>
+    host: <%= ENV["POSTGRES_HOST"] %>
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: <%= RailsConfig.app_name %>_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: <%= RailsConfig.app_name %>_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: <%= RailsConfig.app_name %>_production_cable
+    migrations_paths: db/cable_migrate

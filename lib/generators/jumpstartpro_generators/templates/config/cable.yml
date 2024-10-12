@@ -1,14 +1,16 @@
 default: &default
-  adapter: redis
-  url: <%= RedisConfig.url %>
+  adapter: solid_cable
+  connects_to:
+    database:
+      writing: cable
+  polling_interval: 0.1.seconds
+  message_retention: 1.day
 
 development:
   <<: *default
-  channel_prefix: <%= RailsConfig.app_name %>_development
 
 test:
   adapter: async
 
 production:
   <<: *default
-  channel_prefix: <%= RailsConfig.app_name %>_production
