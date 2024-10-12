@@ -26,4 +26,5 @@ jobs:
     - name: Run the default task
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        RAILS_LOG_TO_STDOUT: true
       run: bundle exec rake
