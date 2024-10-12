@@ -28,7 +28,6 @@ module JumpstartproGenerators
       end
 
       def bin_setup_updates
-        # replace '  system! "bin/rails db:prepare"' with '  system! "bin/rails db:schema:load db:seed"'
         gsub_file "bin/setup", %(system! "bin/rails db:prepare"), <<-RUBY.strip
   system! "bin/rails db:drop db:create"
   system! "bin/rails db:schema:load db:seed"

@@ -44,6 +44,9 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "README_JSP.md", /# 🎉 Jumpstart Pro Rails/
     assert_file "README.md", /# Rails app/
 
+    assert_file "config/environments/development.rb", /config.cache_store = :solid_cache_store/
+    assert_file "config/environments/production.rb", /config.cache_store = :solid_cache_store/
+    assert_file "config/cable.yml", /adapter: solid_cable/
     # TODO:  run bin/setup && bin/rails test within destination root, it should not fail
   end
 end
