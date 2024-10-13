@@ -71,6 +71,8 @@ cd "$repo_name" || exit
 # app_name = current directory name
 app_name=$(basename "$(pwd)")
 
+bundle update
+
 # Install and run the generator
 if [ -n "$local_generator_path" ]; then
   bundle add jumpstartpro_generators --path "$local_generator_path"
@@ -79,7 +81,6 @@ else
 fi
 bin/rails generate jumpstartpro_generators:install
 bundle remove jumpstartpro_generators || true
-bundle update
 
 # Setup the environment
 bin/setup
@@ -95,6 +96,7 @@ _git commit -m "Installing extras on top of Jumpstart Pro"
 echo "To run the app, run:
 
   cd $repo_name
+  direnv allow
   bin/dev
 
 To create new repo on github, run:
@@ -106,4 +108,9 @@ To create new repo on github, run:
 To deploy to Hatchbox, visit:
 
   https://app.hatchbox.io/apps/new
+
+To deploy with Kamal, run:
+
+  # edit config/deploy.yml as necessary
+  kamal setup
 "
