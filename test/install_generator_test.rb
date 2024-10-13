@@ -49,6 +49,15 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/environments/development.rb", /config.cache_store = :solid_cache_store/
     assert_file "config/environments/production.rb", /config.cache_store = :solid_cache_store/
     assert_file "config/cable.yml", /adapter: solid_cable/
-    # TODO:  run bin/setup && bin/rails test within destination root, it should not fail
+    # TODO:  run bin/setup && bin/rails   test within destination root, it should not fail
+
+    # Service name should be dasherized
+    assert_file "config/deploy.yml", /service: rails-app/
+    # Image name should be dasherized
+    assert_file "config/deploy.yml", /image: drnic\/rails-app/
+    # Host should be dasherized
+    assert_file "config/deploy.yml", /host: rails-app.client.scopego.co/
+    # Database name should be underscore
+    assert_file "config/deploy.yml", /POSTGRES_DB: rails_app_production/
   end
 end

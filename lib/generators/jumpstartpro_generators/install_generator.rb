@@ -70,6 +70,10 @@ module JumpstartproGenerators
         copy_file "config/cable.yml", "config/cable.yml", force: true
       end
 
+      def kamal_deployment
+        template "config/deploy.yml.tt", "config/deploy.yml", force: true
+      end
+
       private
 
       def application_js_path(ext)
@@ -94,6 +98,14 @@ module JumpstartproGenerators
 
       def app_name
         File.basename(destination_root)
+      end
+
+      def app_name_underscore
+        app_name.tr("-", "_")
+      end
+
+      def app_name_dasherized
+        app_name.tr("_", "-")
       end
 
       def javascripts_dir(*paths)
