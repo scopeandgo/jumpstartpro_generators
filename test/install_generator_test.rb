@@ -51,6 +51,9 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/cable.yml", /adapter: solid_cable/
     # TODO:  run bin/setup && bin/rails   test within destination root, it should not fail
 
+    assert_file "Procfile", /worker: bin\/jobs/
+    assert_file "Procfile.dev", /worker: bin\/jobs/
+
     # Service name should be dasherized
     assert_file "config/deploy.yml", /service: rails-app/
     # Image name should be dasherized

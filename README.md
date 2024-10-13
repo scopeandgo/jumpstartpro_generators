@@ -1,13 +1,12 @@
 # Jumpstart Pro Generators
 
-When we start new client or internal projects we use [Jumpstart Pro](https://jumpstartrails.com/) and then sprinkle in our own initial gems, config, files, etc.
+When we start new client or internal projects we use Rails 8, Solid Queue, and [Jumpstart Pro](https://jumpstartrails.com/) and then sprinkle in our own initial gems, config, files, etc.
 
 * [Anyway Config](https://github.com/palkan/anyway_config/) and some initial Config subclasses.
 * `.cursorrules` for Cursor AI Editor
-* Configuration for Rails Generators
-* Tweaks to `bin/setup`
-* Tweaks to `config/database.yml` and `config/cable.yml`
-* Initial `db/seeds.rb` for creating staff seeds as admins
+* Configuration for Rails Generators (no jbuilder, helper tests)
+* Tweaks to `config/database.yml` and `config/cable.yml` for Solid Queue & Solid Cable
+* Setup `config/deploy.yml` for Kamal2 deploy to our initial client shared server
 
 ## Usage
 

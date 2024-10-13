@@ -64,6 +64,11 @@ module JumpstartproGenerators
         generate "solid_cable:install"
       end
 
+      def procfile
+        insert_into_file "Procfile", "\nworker: bin/jobs\n"
+        insert_into_file "Procfile.dev", "\nworker: bin/jobs\n"
+      end
+
       def copy_config_files
         directory "config/configs", "config/configs"
         copy_file "config/database.yml", "config/database.yml", force: true
