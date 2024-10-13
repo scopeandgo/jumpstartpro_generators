@@ -1,0 +1,17 @@
+---
+application_name: <%= app_name_titleized %>
+business_name: Scope&Go Pty Ltd
+business_address: 339 Coronation Dr, Milton, QLD, 4064
+domain: <%= app_name_underscore %>.com
+support_email: support@<%= app_name_underscore %>.com
+default_from_email: <%= app_name_titleized %> <no-reply@<%= app_name_underscore %>.com>
+background_job_processor: async
+email_provider:
+personal_accounts: true
+apns: false
+fcm: false
+integrations:
+omniauth_providers:
+payment_processors:
+multitenancy:
+gems:

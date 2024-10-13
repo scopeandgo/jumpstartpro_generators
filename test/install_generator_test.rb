@@ -54,6 +54,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "Procfile", /worker: bin\/jobs/
     assert_file "Procfile.dev", /worker: bin\/jobs/
 
+    assert_file "config/jumpstart.yml", /application_name: Rails App/
+
     # Service name should be dasherized
     assert_file "config/deploy.yml", /service: rails-app/
     # Image name should be dasherized

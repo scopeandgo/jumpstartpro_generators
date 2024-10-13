@@ -83,6 +83,10 @@ module JumpstartproGenerators
         template ".env.tt", ".env", force: true
       end
 
+      def jumpstart_yml
+        template "config/jumpstart.yml.tt", "config/jumpstart.yml"
+      end
+
       private
 
       def application_js_path(ext)
@@ -115,6 +119,10 @@ module JumpstartproGenerators
 
       def app_name_dasherized
         app_name.tr("_", "-")
+      end
+
+      def app_name_titleized
+        app_name.titleize
       end
 
       def javascripts_dir(*paths)
