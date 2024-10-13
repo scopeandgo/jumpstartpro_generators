@@ -108,6 +108,12 @@ To create new repo on github, run:
   gh repo create $github_org/$app_name --source=. --remote=upstream --private --push
   gh repo set-default $github_org/$app_name
 
+To deploy, create credentials files:
+
+  bin/rails credentials:edit --environment production
+  git add .
+  git commit -m "Add initial credentials for production"
+
 To deploy to Hatchbox, visit:
 
   https://app.hatchbox.io/apps/new
