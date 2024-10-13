@@ -62,12 +62,10 @@ aliases:
   logs: app logs -f
   dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
-
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
 volumes:
   - "my_app_storage:/rails/storage"
-
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
@@ -97,7 +95,10 @@ accessories:
   db:
     image: postgres:16
     host: client.scopego.co
-    port: 5432
+    # Uncomment to expose port 5432 on the host interface
+    # otherwise the database will only be accessible to the web containers
+    # via kamal network.
+    # port: 5432
     env:
       clear:
         POSTGRES_USER: postgres
