@@ -59,5 +59,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/deploy.yml", /host: rails-app.client.scopego.co/
     # Database name should be underscore
     assert_file "config/deploy.yml", /POSTGRES_DB: rails_app_production/
+
+    assert_file ".env", /POSTGRES_PASSWORD=/
+    assert_file ".env", /KAMAL_REGISTRY_PASSWORD=/
   end
 end

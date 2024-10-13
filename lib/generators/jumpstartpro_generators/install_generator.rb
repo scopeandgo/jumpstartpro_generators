@@ -74,6 +74,10 @@ module JumpstartproGenerators
         template "config/deploy.yml.tt", "config/deploy.yml", force: true
       end
 
+      def env_file
+        template ".env.tt", ".env", force: true
+      end
+
       private
 
       def application_js_path(ext)
@@ -140,6 +144,10 @@ module JumpstartproGenerators
         source = File.expand_path(source.to_s, destination_root)
         destination = File.expand_path(destination.to_s, destination_root)
         FileUtils.mv(source, destination)
+      end
+
+      def postgres_password
+        @postgres_password ||= SecureRandom.hex(16)
       end
     end
   end
