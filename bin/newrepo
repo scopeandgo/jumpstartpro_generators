@@ -89,7 +89,7 @@ bin/setup
 bin/rails test
 
 # Fix any Rubocop offenses after generators etc
-rubocop -f simple || true
+rubocop -f simple -x || true
 
 echo "Repository '$repo_name' has been initialized successfully."
 
