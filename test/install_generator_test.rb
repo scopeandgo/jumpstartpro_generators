@@ -31,7 +31,7 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/configs/application_config.rb"
     assert_file "config/configs/rails_config.rb"
 
-    assert_file "config/initializers/generators.rb"
+    assert_initializer "generators.rb"
 
     assert_file ".cursorrules"
 
@@ -46,10 +46,12 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "README_JSP.md", /# 🎉 Jumpstart Pro Rails/
     assert_file "README.md", /# Rails app/
 
+    assert_no_file "config/environments/staging.rb"
+
     assert_file "config/environments/development.rb", /config.cache_store = :solid_cache_store/
     assert_file "config/environments/production.rb", /config.cache_store = :solid_cache_store/
+
     assert_file "config/cable.yml", /adapter: solid_cable/
-    # TODO:  run bin/setup && bin/rails   test within destination root, it should not fail
 
     assert_file "Procfile", /worker: bin\/jobs/
     assert_file "Procfile.dev", /worker: bin\/jobs/

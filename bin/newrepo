@@ -88,6 +88,9 @@ bin/setup
 # Run the tests
 bin/rails test
 
+# Fix any Rubocop offenses after generators etc
+rubocop -f simple
+
 echo "Repository '$repo_name' has been initialized successfully."
 
 _git add .

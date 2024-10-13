@@ -47,6 +47,10 @@ module JumpstartproGenerators
         template "README.md.tt", "README.md"
       end
 
+      def drop_staging_env
+        remove_file "config/environments/staging.rb"
+      end
+
       def setup_solid_queue
         gsub_file "config/environments/development.rb", "config.cache_store = :memory_store", <<-RUBY.strip
   # Replace the default in-process memory cache store with a durable alternative.
@@ -62,6 +66,9 @@ module JumpstartproGenerators
         generate "solid_queue:install"
         generate "solid_cache:install"
         generate "solid_cable:install"
+
+        gsub_file "config/environments/development.rb", /config\.active_job\.queue_adapter = Jumpstart\.config\.queue_adapter/, ""
+        gsub_file "config/environments/production.rb", /config\.active_job\.queue_adapter = Jumpstart\.config\.queue_adapter/, ""
       end
 
       def procfile
