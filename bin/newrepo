@@ -112,7 +112,7 @@ To deploy, create credentials files:
 
   bin/rails credentials:edit --environment production
   git add .
-  git commit -m "Add initial credentials for production"
+  git commit -m 'Add initial credentials for production'
 
 To deploy to Hatchbox, visit:
 

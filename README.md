@@ -8,6 +8,7 @@ When we start new client or internal projects we use Rails 8, Solid Queue, and [
 * Tweaks to `config/database.yml` and `config/cable.yml` for Solid Queue & Solid Cable
 * Setup `config/deploy.yml` for Kamal2 deploy to our initial client shared server
 * Initial `config/jumpstart.yml` with default business details
+* Postgres password generated into credentials (if useful for kamal deploy)
 
 ## Usage
 
