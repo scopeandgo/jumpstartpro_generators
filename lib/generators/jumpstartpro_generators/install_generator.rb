@@ -27,6 +27,10 @@ module JumpstartproGenerators
         copy_file ".cursorrules", ".cursorrules"
       end
 
+      def gitignore
+        insert_into_file ".gitignore", "\n.vscode\n"
+      end
+
       def bin_setup_updates
         gsub_file "bin/setup", %(system! "bin/rails db:prepare"), <<-RUBY.strip
   system! "bin/rails db:drop db:create"

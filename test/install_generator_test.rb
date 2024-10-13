@@ -35,6 +35,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
     assert_file ".cursorrules"
 
+    assert_file ".gitignore", /\.vscode/
+
     # bin/setup should contain bin/rails db:schema:load db:seed
     assert_file "bin/setup", /bin\/rails db:schema:load db:seed/
 
