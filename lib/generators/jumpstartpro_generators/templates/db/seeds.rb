@@ -8,15 +8,15 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 #
-# [
-#   {name: "Dr Nic Williams", email: "drnic@scopego.co"}
-# ].each do |user_params|
-#   user = User.create!(user_params.merge({
-#     password: "secret123!",
-#     password_confirmation: "secret123!",
-#     terms_of_service: true
-#   }))
-#   Jumpstart.grant_system_admin!(user)
+[
+  {name: "Dr Nic Williams", email: "drnic@scopego.co"}
+].each do |user_params|
+  user = User.create!(user_params.merge({
+    password: "secret123!",
+    password_confirmation: "secret123!",
+    terms_of_service: true
+  }))
+  Jumpstart.grant_system_admin!(user)
 
-#   # account = user.personal_account
-# end
+  # account = user.personal_account
+end
