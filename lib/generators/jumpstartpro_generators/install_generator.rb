@@ -19,6 +19,10 @@ module JumpstartproGenerators
         run "bundle install"
       end
 
+      def add_brewfile_entries
+        insert_into_file "Brewfile", "\nbrew \"yq\"\n"
+      end
+
       def copy_initializers
         directory "config/initializers", "config/initializers"
       end
@@ -84,6 +88,28 @@ module JumpstartproGenerators
 
       def kamal_deployment
         template "config/deploy.yml.tt", "config/deploy.yml", force: true
+      end
+
+      def kamal_secrets
+        insert_into_file ".kamal/secrets", <<-SHELL.strip
+          # Either use .env or rails credentials to store database password.
+          # POSTGRES_PASSWORD=<%= ENV.fetch("POSTGRES_PASSWORD", "password") %>
+          credentials=$(bin/rails credentials:show --environment production)
+          POSTGRES_PASSWORD=$(echo "$credentials" | yq '.database.primary.password // "password"')
+          POSTGRES_USER=$(echo "$credentials" | yq '.database.primary.username // "postgres"')
+        SHELL
+      end
+
+      def credentials_file
+        insert_into_file "lib/templates/rails/credentials/credentials.yml.tt", before: "active_record_encryption:" do
+          <<~YAML
+            database:
+              primary:
+                username: postgres
+                password: <%= SecureRandom.alphanumeric(32) %>
+
+          YAML
+        end
       end
 
       def env_file

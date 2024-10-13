@@ -51,6 +51,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     assert_file "config/environments/development.rb", /config.cache_store = :solid_cache_store/
     assert_file "config/environments/production.rb", /config.cache_store = :solid_cache_store/
 
+    assert_file "lib/templates/rails/credentials/credentials.yml.tt", /^database:/
+
     assert_file "config/cable.yml", /adapter: solid_cable/
 
     assert_file "Procfile", /worker: bin\/jobs/
@@ -67,7 +69,10 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
     # Database name should be underscore
     assert_file "config/deploy.yml", /POSTGRES_DB: rails_app_production/
 
-    assert_file ".env", /POSTGRES_PASSWORD=/
+    assert_file ".kamal/secrets", /credentials=/
+
+    assert_file "Brewfile", /yq/
+
     assert_file ".env", /KAMAL_REGISTRY_PASSWORD=/
   end
 end
