@@ -51,19 +51,52 @@ The generator output might look like:
 
 ```plain
      gemfile  anyway_config
+     gemfile  mission_control-jobs
          run  bundle install from "."
-Fetching gem metadata from https://rubygems.org/........
+      append  Brewfile
+       exist  config/initializers
+      create  config/initializers/generators.rb
+      create  .cursorrules
+      append  .gitignore
+        gsub  bin/setup
+       force  db/seeds.rb
+      create  README.md
+      remove  config/environments/staging.rb
+        gsub  config/environments/development.rb
+      remove  config/recurring.yml
+    generate  solid_queue:install
+       rails  generate solid_queue:install
+   identical  config/queue.yml
+      create  config/recurring.yml
+      create  db/queue_schema.rb
+   identical  bin/jobs
+        gsub  config/environments/production.rb
+    generate  solid_cache:install
+       rails  generate solid_cache:install
+   identical  config/cache.yml
+      create  db/cache_schema.rb
+        gsub  config/environments/production.rb
+    generate  solid_cable:install
+       rails  generate solid_cable:install
+      create  db/cable_schema.rb
+       force  config/cable.yml
+        gsub  config/environments/development.rb
+        gsub  config/environments/production.rb
+      append  Procfile
+      append  Procfile.dev
       create  config/configs
       create  config/configs/application_config.rb
       create  config/configs/rails_config.rb
        force  config/database.yml
        force  config/cable.yml
-      create  .cursorrules
-        gsub  bin/setup
-       force  db/seeds.rb
+       force  config/deploy.yml
+      append  .kamal/secrets
+      insert  lib/templates/rails/credentials/credentials.yml.tt
+      create  .env
+      create  config/jumpstart.yml
 ```
 
-The created databases will be based on the app name:
+The created databases will be based on the base directory name, which is the appname `testapp` in example above:
 
 * `testapp_development`
 * `testapp_test`
