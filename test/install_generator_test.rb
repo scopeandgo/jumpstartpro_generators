@@ -48,6 +48,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
     assert_no_file "config/environments/staging.rb"
 
+    assert_file "config/application.rb", /config\.load_defaults 8\.0/
+
     assert_file "config/environments/development.rb", /config.cache_store = :solid_cache_store/
     assert_file "config/environments/production.rb", /config.cache_store = :solid_cache_store/
 

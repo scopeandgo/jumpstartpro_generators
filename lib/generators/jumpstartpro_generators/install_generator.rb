@@ -55,6 +55,11 @@ module JumpstartproGenerators
         remove_file "config/environments/staging.rb"
       end
 
+      def setup_application_config
+        # change config.load_defaults 7.2 -> config.load_defaults 8.0
+        gsub_file "config/application.rb", /config\.load_defaults 7\.2/, "config.load_defaults 8.0"
+      end
+
       def setup_solid_queue
         gsub_file "config/environments/development.rb", "config.cache_store = :memory_store", <<-RUBY.strip
   # Replace the default in-process memory cache store with a durable alternative.
