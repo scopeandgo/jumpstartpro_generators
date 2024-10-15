@@ -95,7 +95,7 @@ bin/rails test
 overcommit --install
 
 # Fix any Rubocop offenses after generators etc
-rubocop -f simple -x || true
+rubocop -f simple -a || true
 
 echo "Repository '$repo_name' has been initialized successfully."
 
