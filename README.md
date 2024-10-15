@@ -5,6 +5,7 @@ When we start new client or internal projects we use Rails 8, Solid Queue, and [
 * [Anyway Config](https://github.com/palkan/anyway_config/) and some initial Config subclasses.
 * `.cursorrules` for Cursor AI Editor
 * Configuration for Rails Generators (no jbuilder, helper tests)
+* Add `annotate` and setup rake task
 * Tweaks to `config/database.yml` and `config/cable.yml` for Solid Queue & Solid Cable
 * Setup `config/deploy.yml` for Kamal2 deploy to our initial client shared server
 * Defaults to Solid Queue in Puma; or uncomment `jobs:` for standalone jobs containers

@@ -85,8 +85,14 @@ bundle remove jumpstartpro_generators || true
 # Setup the environment
 bin/setup
 
+# Re-migrate to update the Solid X schema files
+bin/rails db:migrate
+
 # Run the tests
 bin/rails test
+
+# Setup local git hooks
+overcommit --install
 
 # Fix any Rubocop offenses after generators etc
 rubocop -f simple -x || true

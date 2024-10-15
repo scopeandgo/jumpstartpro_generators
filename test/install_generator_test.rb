@@ -27,6 +27,8 @@ class JumpstartproGenerators::InstallGeneratorTest < ::Rails::Generators::TestCa
 
   test "generates files" do
     assert_file "Gemfile", /anyway_config/
+    assert_file "Gemfile", /annotate/
+    assert_file "lib/tasks/auto_annotate_models.rake"
 
     assert_file "config/configs/application_config.rb"
     assert_file "config/configs/rails_config.rb"

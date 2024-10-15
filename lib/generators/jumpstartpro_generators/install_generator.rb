@@ -16,7 +16,12 @@ module JumpstartproGenerators
           end
         end
 
+        gem_group :development do
+          gem "annotate"
+        end
+
         run "bundle install"
+        generate "annotate:install"
       end
 
       def add_brewfile_entries
