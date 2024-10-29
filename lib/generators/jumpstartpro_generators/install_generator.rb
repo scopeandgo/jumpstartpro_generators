@@ -101,7 +101,7 @@ module JumpstartproGenerators
       end
 
       def kamal_secrets
-        insert_into_file ".kamal/secrets", <<-SHELL.strip
+        gsub_file ".kamal/secrets", /POSTGRES_PASSWORD=.*/, <<~SHELL.strip
           # Either use .env or rails credentials to store database password.
           # POSTGRES_PASSWORD=<%= ENV.fetch("POSTGRES_PASSWORD", "password") %>
           credentials=$(bin/rails credentials:show --environment production)
