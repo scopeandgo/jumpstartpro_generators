@@ -111,7 +111,7 @@ echo "To run the app, run:
 To create new repo on github, run:
 
   cd $repo_name
-  gh repo create $github_org/$app_name --source=. --remote=upstream --private --push
+  gh repo create $github_org/$app_name --source=. --remote=origin --private --push
   gh repo set-default $github_org/$app_name
 
 To deploy, create credentials files:
