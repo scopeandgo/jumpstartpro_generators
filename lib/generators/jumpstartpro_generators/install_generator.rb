@@ -9,6 +9,11 @@ module JumpstartproGenerators
       desc "Install Scope & Go defaults into Jumpstart Pro"
       source_root File.join(File.dirname(__FILE__), "templates")
 
+      def setup_application_config
+        # change config.load_defaults 7.2 -> config.load_defaults 8.0
+        gsub_file "config/application.rb", /config\.load_defaults 7\.2/, "config.load_defaults 8.0"
+      end
+
       def add_gemfile_entries
         %w[anyway_config solid_cache solid_queue solid_cable mission_control-jobs].each do |gem|
           unless File.read(File.join(destination_root, "Gemfile")).include?(gem)
@@ -21,7 +26,7 @@ module JumpstartproGenerators
         end
 
         run "bundle install"
-        generate "annotate:install"
+        generate "annotate:install", "--force"
       end
 
       def add_brewfile_entries
@@ -60,11 +65,6 @@ module JumpstartproGenerators
         remove_file "config/environments/staging.rb"
       end
 
-      def setup_application_config
-        # change config.load_defaults 7.2 -> config.load_defaults 8.0
-        gsub_file "config/application.rb", /config\.load_defaults 7\.2/, "config.load_defaults 8.0"
-      end
-
       def setup_solid_queue
         gsub_file "config/environments/development.rb", "config.cache_store = :memory_store", <<-RUBY.strip
   # Replace the default in-process memory cache store with a durable alternative.
@@ -77,9 +77,9 @@ module JumpstartproGenerators
 
         # delete config/recurring.yml
         remove_file "config/recurring.yml"
-        generate "solid_queue:install"
-        generate "solid_cache:install"
-        generate "solid_cable:install"
+        generate "solid_queue:install", "--force"
+        generate "solid_cache:install", "--force"
+        generate "solid_cable:install", "--force"
 
         gsub_file "config/environments/development.rb", /config\.active_job\.queue_adapter = Jumpstart\.config\.queue_adapter/, ""
         gsub_file "config/environments/production.rb", /config\.active_job\.queue_adapter = Jumpstart\.config\.queue_adapter/, ""
