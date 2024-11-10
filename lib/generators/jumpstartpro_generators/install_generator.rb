@@ -22,11 +22,11 @@ module JumpstartproGenerators
         end
 
         gem_group :development do
-          gem "annotate"
+          gem "annotaterb"
         end
 
         run "bundle install"
-        generate "annotate:install", "--force"
+        generate "annotate_rb:install", "--force"
       end
 
       def add_brewfile_entries
